@@ -1,21 +1,23 @@
 const path = require('path');
 const glob = require('glob');
-const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
-const webpack = require('webpack'); //to access built-in plugins
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const nunjucks = require('nunjucks');
 const NunjucksWebpackPlugin = require("nunjucks-webpack-plugin");
-const dirNode = 'node_modules';
-const dirApp = path.join(__dirname, 'app');
-const dirAssets = path.join(__dirname, 'assets');
-// const nunjucksOptions = JSON.stringify({
-//     searchPaths: basePath + '/resources/html/',
-//     context: nunjucksContext
-// });
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+
+const pages = glob.sync('**/*.njk',{
+    cwd: path.join(__dirname,'src/templates/pages/'),}).map(page=>{
+        return {
+            from: `src/templates/pages/${page}`,
+            to: `${page.split(".",1)}.html`
+        }
+    })
+
+
 module.exports = {
     entry: {
-        main: ".app.js",
-        // vendor: "./src/vendor.js"
+        main:['./main.js','./src/assets/scss/styles.scss']
     },
     output: {
         path: __dirname + '/dist',
@@ -49,30 +51,19 @@ module.exports = {
             },
 
             // CSS / SASS
-            {
-                test: /\.scss/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true,
-                            includePaths: [dirAssets]
-                        }
-                    }
-                ]
-            },
+              {
+                  test: /\.(sa|sc|c)ss$/,
+                  use: [
+                      MiniCssExtractPlugin.loader,
+                      'css-loader',
+                      'sass-loader',
+                  ]
+              }, 
             // NUNJUCKS
-            // {
-            //     test: /\.(njk|nunjucks)$/,
-            //     loader: ['html-loader', `nunjucks-html-loader?${nunjucksOptions}`]
-            // },
+            {
+                test: /\.(njk|nunjucks)$/,
+                loader: `nunjucks-loader`
+            },
 
             // IMAGES
             {
@@ -84,24 +75,38 @@ module.exports = {
             }
         ]
     },
+    optimization:{
+        minimizer:[
+            new UglifyJsPlugin({
+                cache:true,
+                parallel:true,
+                uglifyOptions:{
+                    compress:{
+                        inline:true
+                    },
+                    ecma:6,
+                    mangle:true
+                },
+                sourceMap:true
+            })
+        ],
+        runtimeChunk:false
+    },
     plugins: [
         // new HtmlWebpackPlugin({
         //     template: './src/templates/index.html'
         // }),
         new NunjucksWebpackPlugin({
-            templates: [
-                {
-                    from: "./src/templates/index.njk",
-                    to: "index.html"
-                },
-                // {
-                //     from: "templates/anotherpage.njk",
-                //     to: "anotherpage.html"
-                // }
-            ]
+            templates: [...pages]
         }),
-        // new MiniCssExtractPlugin({
-        //      filename: "assets/css/[name].css",
-        // })
-    ]
+        new MiniCssExtractPlugin({
+             filename: "assets/css/[name].css",
+             chunkFilename:'assets/css/[name].[hash].css'
+        }),
+        new CleanWebpackPlugin(['dist'])
+    ],
+    devServer:{
+        contentBase:'./dist',
+        port:3000
+    }
 };
