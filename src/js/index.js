@@ -1,12 +1,12 @@
-import {saludo} from './modules';
+import {getNumbers,sendEmail} from './modules';
 import Swiper from 'swiper/dist/js/swiper.js';
-var swiper =new Swiper('.swiper-container', {
-    //  direction: 'vertical',
+var swiperFadeIn = new Swiper('.swiperFadeIn-container', {
+     effect: 'fade',
      autoplay: {
          delay: 3000
      },
-    //  pagination: {
-    //      el: '.swiper-pagination'
-    //  }
+
  })
- saludo();
+ getNumbers();
+
+ document.querySelector('form').addEventListener('submit',sendEmail)

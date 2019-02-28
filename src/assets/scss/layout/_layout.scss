@@ -31,6 +31,7 @@
 }
 .main{
     grid-area: main;
+    width: 100%;
 }
 .header{
     grid-area: header;
@@ -45,21 +46,45 @@
     &__description{
         padding: 1em;
     }
+  
 }
 .cards{
     display: grid;
     grid-gap: .8em;
+     @include phone{
+        grid-template-columns: 1fr;
+
+     }
     grid-template-columns: repeat(2,1fr);
+
 }
 .layout{
+    &-promotion{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
     &-services{
+        display: flex;
+        @include phone{
+            flex-direction: column;
 
+        }
+        flex-direction: vertical;
+        justify-content: center;
+
+    }
+}
+.services{
+    margin: .5em;
+    @include desktop{
+        margin: 2em ;
     }
 }
 @include desktop{
     .container-lg {
         width: 90%;
-        max-width: 1200px;
+        // max-width: 1200px;
         margin: 0 auto;
     }
 }

@@ -2,14 +2,14 @@
     //   height: 50vh;
     overflow: hidden;
     position: relative;
-    transition: background .6s;
     width: 100%;
     height: 80vh;
-  
+  display: grid;
 }
 .header{
     color: var(--white);
-    position: fixed;
+    position: absolute;
+    top: 0;
     width: 100%;
     height: 100px;
     @include desktop{
