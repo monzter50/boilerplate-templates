@@ -1,4 +1,4 @@
-import {getNumbers,sendEmail} from './modules';
+import {getNumbers,sendEmail,Collapse} from './modules';
 import Swiper from 'swiper/dist/js/swiper.js';
 var swiperFadeIn = new Swiper('.swiperFadeIn-container', {
      effect: 'fade',
@@ -8,5 +8,6 @@ var swiperFadeIn = new Swiper('.swiperFadeIn-container', {
 
  })
  getNumbers();
+ document.querySelector('.navbar__toggle').addEventListener('click', Collapse);
 
- document.querySelector('form').addEventListener('submit',sendEmail)
+ document.querySelector('form').addEventListener('submit',sendEmail);

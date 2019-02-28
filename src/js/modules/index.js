@@ -75,4 +75,9 @@ export const getNumbers=()=>{
           })
  }
 
- 
+ export const Collapse = (e) => {
+     console.log("toogle")
+     let collapse = document.querySelector('.navbar__collapse');
+     collapse.classList.toggle('show')
+
+ }
