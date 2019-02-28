@@ -1,1 +1,1 @@
-export const saludo = () => (console.log("hola mundo"))
+export const saludo = () => {console.log("hola mundo")}

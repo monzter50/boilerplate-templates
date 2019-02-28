@@ -16,9 +16,7 @@ const pages = glob.sync('**/*.njk',{
 
 
 module.exports = {
-    entry: {
-        main:['./main.js','./src/assets/scss/styles.scss']
-    },
+    entry: ['./main.js','./src/assets/scss/styles.scss'],
     output: {
         path: __dirname + '/dist',
         filename: "assets/js/[name].js",

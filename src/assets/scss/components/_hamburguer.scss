@@ -1,0 +1,24 @@
+.hamburguer{
+    span {
+        display: block;
+        position: absolute;
+        height: 4px;
+        width: 100%;
+        background: black;
+        opacity: 1;
+        left: 0;
+        transition: all 0.25s ease-in-out;
+
+        &:nth-child(1) {
+            top: 0;
+        }
+
+        &:nth-child(2) {
+            top: 40%;
+        }
+
+        &:nth-child(3) {
+            bottom: 0;
+        }
+    }
+}

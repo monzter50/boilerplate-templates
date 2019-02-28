@@ -1,0 +1,43 @@
+.form{
+    @include desktop{
+        width: 550px;
+         position: absolute;
+         bottom:15%;
+         left: 10px;
+         transform: translateY(15%);
+         z-index: var(--z-normal);
+    }
+   &__container{
+       width: 100%;
+       background: var(--first-color);
+   }
+   &__header{
+       background: var(--third-color);
+       color: var(--second-color);
+       @include desktop{
+            text-align: center;
+       }
+       
+       padding: .3em .7em;
+   }
+   &__reservation{
+       display: grid;
+       grid-template-columns: 1fr;
+
+       @include desktop{
+        grid-template-columns: repeat(2, 1fr);
+
+       }
+   }
+   &__room{
+        display: flex;
+   }
+   &--group{
+       display: flex;
+       flex-direction: column;
+       margin: .7em .5em;
+       label{
+           margin-bottom: .4em;
+       }
+   }
+}

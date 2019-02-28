@@ -1,0 +1,41 @@
+.banner{
+    //   height: 50vh;
+    overflow: hidden;
+    position: relative;
+    transition: background .6s;
+    width: 100%;
+    height: 80vh;
+  
+}
+.header{
+    color: var(--white);
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    @include desktop{
+        height: 170px;
+    }
+    background: rgb(4, 81, 112);
+    background: linear-gradient(90deg, rgba(4, 81, 112, 1) 40%, rgba(0, 0, 0, 0) 62%);
+    z-index: var(--z-fixed);
+    &__nav{
+        display: none;
+        // background: yellow;
+        @include desktop{
+            display: grid;
+            height: 150px;
+            grid-template-columns: repeat(2,1fr)
+        }
+
+    }
+    &__phone{
+        display: flex;
+        justify-content: flex-end;
+        align-items:center; 
+        color: var(--first-color);
+    }
+    &__logo{
+        display: grid;
+        align-items: center;
+    }
+}

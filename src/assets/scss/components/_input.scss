@@ -1,0 +1,21 @@
+.input,
+[class^=input-] {
+    border: none;
+    outline: none;
+    padding: .5em 0;
+    width: 100%;
+}
+.input{
+    &--number{
+        max-width: 60px;
+    }
+     &--date {
+         max-width: 100px;
+     }
+     &--text{
+         @include phone{
+             max-width: 300px;
+         }
+        max-width: 500px;
+     }
+}

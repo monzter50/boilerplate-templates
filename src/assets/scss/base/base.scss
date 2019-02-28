@@ -6,5 +6,14 @@
 
 body {
   margin : 0;
+  padding: 0;
+  @include desktop{
+      background: rgb(4, 81, 112);
+      background: linear-gradient(180deg, rgba(4, 81, 112, 0.8183474073223039) 3%, rgba(0, 0, 0, 0) 31%);
+  }
+ 
   font-family : $font-family;
+}
+html{
+  // scroll-behavior: smooth;
 }
